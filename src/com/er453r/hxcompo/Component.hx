@@ -1,17 +1,15 @@
-package com.er453r;
+package com.er453r.hxcompo;
 
 #if js
 import js.html.Element;
 import js.Browser;
 #end
 
-@:autoBuild(com.er453r.ComponentBuilder.build())
+@:autoBuild(com.er453r.hxcompo.ComponentBuilder.build())
 class Component {
 	private static inline var CONTENT_SELECTOR:String = ".content";
 #if js
 	public var view(default, null):Element;
-
-	private var children(default, null):Array<Component> = [];
 
 	private function buildFromString(html:String):Void{
 		var template:TemplateElement = cast Browser.document.createElement("template");
@@ -31,14 +29,10 @@ class Component {
 
 	public function append(component:Component):Void{
 		find(CONTENT_SELECTOR).appendChild(component.view);
-
-		children.push(component);
 	}
 
 	public function remove(component:Component):Void{
 		component.view.remove();
-
-		children.remove(component);
 	}
 #end
 }

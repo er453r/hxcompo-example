@@ -1,5 +1,6 @@
 package com.er453r.components;
 
+import com.er453r.hxcompo.Component;
 import haxe.Timer;
 
 @view('TestContainer.html')

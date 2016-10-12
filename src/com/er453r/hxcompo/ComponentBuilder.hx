@@ -1,4 +1,4 @@
-package com.er453r;
+package com.er453r.hxcompo;
 
 import haxe.macro.ExprTools;
 import haxe.macro.Type.ClassType;

@@ -1,4 +1,4 @@
-package com.er453r;
+package com.er453r.hxcompo;
 
 import js.html.Element;
 import js.html.Node;
