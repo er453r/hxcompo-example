@@ -39,6 +39,40 @@ class ComponentBuilder {
 
 		var fields:Array<Field> = Context.getBuildFields();
 
+		var hasConstructor:Bool = false;
+
+		for(field in fields){
+			if(field.name == "new"){
+				hasConstructor = true;
+
+				break;
+			}
+		}
+
+		if(!hasConstructor){
+			fields.push({name: 'new', doc: null, access: [Access.APublic], kind: FieldType.FFun({
+				params : [],
+				args : [],
+				expr: macro {},
+				ret : macro : Void
+			}), pos: Context.currentPos()});
+		}
+
+		for(field in fields){
+			if(field.name == "new"){
+				switch(field.kind){
+					case FFun(func):{
+						func.expr = macro {
+							buildFromString(this.contents);
+							${func.expr};
+						};
+					}
+
+					default: {}
+				}
+			}
+		}
+
 		fields.push({name: 'contents', doc: null, access: [Access.APrivate], kind: FieldType.FVar(macro:String, macro $v{string}), pos: Context.currentPos()});
 
 		return fields;

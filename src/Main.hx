@@ -8,7 +8,7 @@ class Main{
 		js.Browser.document.addEventListener("DOMContentLoaded", function(event){
 			var component:TestComponent = new TestComponent();
 
-			Browser.document.body.appendChild(component.htmlToElements());
+			Browser.document.body.appendChild(component.view);
 		});
 	}
 }
