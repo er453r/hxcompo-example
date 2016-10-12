@@ -1,11 +1,28 @@
 package com.er453r;
 
-import Array;
+import haxe.macro.Type.ClassType;
 import haxe.macro.Context;
 import haxe.macro.Expr;
 
 class ComponentBuilder {
+	private static inline var TARGET_SUPERCLASS:String = "com.er453r.Component";
+
 	public static function build(file:String):Array<Field> {
+		var classType:ClassType;
+		switch (Context.getLocalType()) {
+			case TInst(r, _):
+				classType = r.get();
+			case _:
+		}
+
+		var superClass:String;
+
+		if(classType.superClass != null)
+			superClass = classType.superClass.t.toString();
+
+		if(superClass != TARGET_SUPERCLASS)
+			Context.error('Class has to extend ${TARGET_SUPERCLASS}', Context.currentPos());
+
 		var classString:String = Context.getLocalClass().toString();
 
 		var parts:Array<String> = classString.split(".");

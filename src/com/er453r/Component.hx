@@ -1,10 +1,10 @@
 package com.er453r;
 
+import js.html.Element;
 import js.Browser;
-import js.html.DOMElement;
 
 class Component {
-	public var view(default, null):DOMElement;
+	public var view(default, null):Element;
 
 	private function buildFromString(html:String):Void{
 		var template:TemplateElement = cast Browser.document.createElement("template");
@@ -12,5 +12,13 @@ class Component {
 		template.innerHTML = html;
 
 		view = cast template.content.firstChild;
+	}
+
+	public function find(selector:String):Element{
+		return view.querySelector(selector);
+	}
+
+	public function appendTo(selector:String, element:Element):Void{
+		find(selector).appendChild(element);
 	}
 }
