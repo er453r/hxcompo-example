@@ -20,6 +20,18 @@ class ComponentBuilder {
 
 		try{
 			xml = Xml.parse(string);
+
+			var childrenCount:UInt = 0;
+
+			var iterator:Iterator<Xml> = xml.elements();
+
+			while(iterator.hasNext()){
+				childrenCount++;
+				iterator.next();
+			}
+
+			if(childrenCount != 1)
+				Context.error('View File ${p} has to contain exactly 1 root node', Context.currentPos());
 		}
 		catch(err:String){
 			Context.error('Error parsing file ${p}: ${err}', Context.currentPos());

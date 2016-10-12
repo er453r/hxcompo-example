@@ -6,17 +6,17 @@ import js.Browser;
 
 @:build(com.er453r.ComponentBuilder.build('TestView.html'))
 class TestComponent {
-	public function new() {
-		trace(this.contents);
-	}
+	private var node:Node;
+
+	public function new(){}
 
 	public function htmlToElements():Node{
 		var template:TemplateElement = cast Browser.document.createElement("template");
 
 		template.innerHTML = this.contents;
 
-		trace(template.content.firstChild);
+		node = template.content.firstChild;
 
-		return template.content.firstChild;
+		return node;
 	}
 }
