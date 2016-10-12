@@ -1,5 +1,6 @@
 package;
 
+import haxe.Timer;
 import com.er453r.components.TestContainer;
 import js.Browser;
 import com.er453r.components.TestComponent;
@@ -11,11 +12,17 @@ class Main{
 
 			Browser.document.body.appendChild(container.view);
 
-			for(n in 0...10){
-				var component:TestComponent = new TestComponent();
+			var component:TestComponent = new TestComponent();
 
-				container.appendTo(".content", component.view);
+			for(n in 0...10){
+				component = new TestComponent();
+
+				container.append(component);
 			}
+
+			Timer.delay(function(){
+				container.remove(component);
+			}, 2000);
 		});
 	}
 }
