@@ -101,6 +101,17 @@ class ComponentBuilder {
 
 		fields.push({name: 'contents', doc: null, access: [Access.APrivate], kind: FieldType.FVar(macro:String, macro $v{string}), pos: Context.currentPos()});
 
+		fields.push({name: 'main', doc: null, access: [Access.APublic, Access.AStatic], kind: FieldType.FFun({
+			params : [],
+			args : [],
+			expr: macro {
+				js.Browser.document.addEventListener("DOMContentLoaded", function(event){
+					js.Browser.document.body.appendChild(new TestContainer().view);
+				});
+			},
+			ret : macro : Void
+		}), pos: Context.currentPos()});
+
 		return fields;
 	}
 }
