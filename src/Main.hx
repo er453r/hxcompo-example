@@ -1,16 +1,14 @@
 package;
 
+import js.Browser;
 import com.er453r.components.TestComponent;
-import com.er453r.TestClass;
 
 class Main{
 	public static function main() {
-		var test:TestClass = new TestClass();
+		js.Browser.document.addEventListener("DOMContentLoaded", function(event){
+			var component:TestComponent = new TestComponent();
 
-		trace(test.publicVar);
-
-		var component:TestComponent = new TestComponent();
-
-		trace(component);
+			Browser.document.body.appendChild(component.htmlToElements());
+		});
 	}
 }

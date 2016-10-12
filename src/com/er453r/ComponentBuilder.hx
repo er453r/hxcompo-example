@@ -1,11 +1,18 @@
 package com.er453r;
 
+import Array;
 import haxe.macro.Context;
 import haxe.macro.Expr;
 
 class ComponentBuilder {
-	public static function build(viewPath:String):Array<Field> {
-		var p = Context.resolvePath(viewPath);
+	public static function build(file:String):Array<Field> {
+		var classString:String = Context.getLocalClass().toString();
+
+		var parts:Array<String> = classString.split(".");
+		parts.pop();
+		var path:String = parts.join("/");
+
+		var p = Context.resolvePath(path + "/" + file);
 
 		var string:String = sys.io.File.getContent(p);
 
