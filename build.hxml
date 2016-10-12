@@ -1,3 +1,7 @@
 -cp src
 -main Main
 -js dom-test.js
+#-D js-flatten
+#-dce full
+#-debug
+#-D js-es5
