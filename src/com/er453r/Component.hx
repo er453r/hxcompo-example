@@ -1,11 +1,14 @@
 package com.er453r;
 
+#if js
 import js.html.Element;
 import js.Browser;
+#end
 
+@:autoBuild(com.er453r.ComponentBuilder.build())
 class Component {
 	private static inline var CONTENT_SELECTOR:String = ".content";
-
+#if js
 	public var view(default, null):Element;
 
 	private var children(default, null):Array<Component> = [];
@@ -37,4 +40,5 @@ class Component {
 
 		children.remove(component);
 	}
+#end
 }

@@ -1,13 +1,16 @@
 package com.er453r;
 
+import haxe.macro.ExprTools;
 import haxe.macro.Type.ClassType;
 import haxe.macro.Context;
 import haxe.macro.Expr;
 
 class ComponentBuilder {
-	private static inline var TARGET_SUPERCLASS:String = "com.er453r.Component";
+	private static inline var VIEW_ANNOTATION:String = "view";
 
-	public static function build(file:String):Array<Field> {
+	public static function build():Array<Field> {
+		var file:String;
+
 		var classType:ClassType;
 		switch (Context.getLocalType()) {
 			case TInst(r, _):
@@ -15,13 +18,19 @@ class ComponentBuilder {
 			case _:
 		}
 
+		for (meta in classType.meta.get()){
+			if(meta.name == VIEW_ANNOTATION)
+				if(meta.params.length > 0)
+					file = ExprTools.getValue(meta.params[0]);
+		}
+
 		var superClass:String;
 
 		if(classType.superClass != null)
 			superClass = classType.superClass.t.toString();
 
-		if(superClass != TARGET_SUPERCLASS)
-			Context.error('Class has to extend ${TARGET_SUPERCLASS}', Context.currentPos());
+		if(superClass != Type.getClassName(Component))
+			Context.error('Class has to extend ${Type.getClassName(Component)}', Context.currentPos());
 
 		var classString:String = Context.getLocalClass().toString();
 
