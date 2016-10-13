@@ -3,7 +3,7 @@ package com.er453r.components;
 import com.er453r.hxcompo.Component;
 import haxe.Timer;
 
-@view('TestContainer.html')
+@:view('TestContainer.html')
 class TestContainer extends Component {
 	public function new():Void{
 		var component:TestComponent = new TestComponent();

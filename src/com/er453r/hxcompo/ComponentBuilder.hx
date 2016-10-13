@@ -7,7 +7,7 @@ import haxe.macro.Context;
 import haxe.macro.Expr;
 
 class ComponentBuilder {
-	private static inline var VIEW_ANNOTATION:String = "view";
+	private static inline var VIEW_ANNOTATION:String = ":view";
 
 	public static function build():Array<Field> {
 		var file:String;
