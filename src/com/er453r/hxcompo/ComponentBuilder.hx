@@ -1,5 +1,6 @@
 package com.er453r.hxcompo;
 
+import haxe.macro.TypeTools;
 import haxe.macro.ExprTools;
 import haxe.macro.Type.ClassType;
 import haxe.macro.Context;
@@ -101,16 +102,26 @@ class ComponentBuilder {
 
 		fields.push({name: 'contents', doc: null, access: [Access.APrivate], kind: FieldType.FVar(macro:String, macro $v{string}), pos: Context.currentPos()});
 
-		fields.push({name: 'main', doc: null, access: [Access.APublic, Access.AStatic], kind: FieldType.FFun({
-			params : [],
-			args : [],
-			expr: macro {
-				js.Browser.document.addEventListener("DOMContentLoaded", function(event){
-					js.Browser.document.body.appendChild(new TestContainer().view);
-				});
-			},
-			ret : macro : Void
-		}), pos: Context.currentPos()});
+		var args:Array<String> = Sys.args();
+
+		var mainIndex:Int = args.indexOf('-main');
+
+		if(mainIndex != -1){
+			var mainClass:String = args[mainIndex + 1];
+
+			if(TypeTools.toString(Context.getLocalType()) == mainClass){
+				fields.push({name: 'main', doc: null, access: [Access.APublic, Access.AStatic], kind: FieldType.FFun({
+					params : [],
+					args : [],
+					expr: macro {
+						js.Browser.document.addEventListener("DOMContentLoaded", function(event){
+						js.Browser.document.body.appendChild(new TestContainer().view);
+					});
+					},
+					ret : macro : Void
+				}), pos: Context.currentPos()});
+			}
+		}
 
 		return fields;
 	}
