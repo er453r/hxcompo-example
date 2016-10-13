@@ -1,7 +1,6 @@
 package com.er453r.components;
 
-import js.html.Element;
-import Type;
+import js.html.DivElement;
 import haxe.Timer;
 
 import com.er453r.hxcompo.Component;
@@ -16,7 +15,7 @@ class TestContainer extends Component {
 			append(component);
 		}
 
-		var title:Element = this.title;
+		var title:DivElement = this.self;
 		title.innerHTML = "ready...";
 
 		Timer.delay(function(){
@@ -24,7 +23,5 @@ class TestContainer extends Component {
 
 			title.innerHTML = "GO!";
 		}, 2000);
-
-		trace(Type.getClass(this.title));
 	}
 }
