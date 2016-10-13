@@ -2,6 +2,7 @@
 -cp src
 -main com.er453r.components.TestContainer
 -js dom-test.js
+-lib hxcompo
 #-dce full
 #-debug
 #-D js-es5
