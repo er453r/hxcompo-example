@@ -4,5 +4,5 @@
 -js dom-test.js
 #-dce full
 #-debug
--D js-es5
+#-D js-es5
 #-D js-flatten

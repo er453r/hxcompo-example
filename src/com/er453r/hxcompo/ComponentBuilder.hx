@@ -109,13 +109,15 @@ class ComponentBuilder {
 		if(mainIndex != -1){
 			var mainClass:String = args[mainIndex + 1];
 
+			var type = asTypePath(mainClass);
+
 			if(TypeTools.toString(Context.getLocalType()) == mainClass){
 				fields.push({name: 'main', doc: null, access: [Access.APublic, Access.AStatic], kind: FieldType.FFun({
 					params : [],
 					args : [],
 					expr: macro {
 						js.Browser.document.addEventListener("DOMContentLoaded", function(event){
-						js.Browser.document.body.appendChild(new TestContainer().view);
+						js.Browser.document.body.appendChild(new $type().view);
 					});
 					},
 					ret : macro : Void
@@ -124,5 +126,22 @@ class ComponentBuilder {
 		}
 
 		return fields;
+	}
+
+	static public function asTypePath(s:String, ?params):TypePath {
+		var parts = s.split('.');
+		var name = parts.pop(),
+		sub = null;
+		if (parts.length > 0 && parts[parts.length - 1].charCodeAt(0) < 0x5B) {
+			sub = name;
+			name = parts.pop();
+			if(sub == name) sub = null;
+		}
+		return {
+			name: name,
+			pack: parts,
+			params: params == null ? [] : params,
+			sub: sub
+		};
 	}
 }
