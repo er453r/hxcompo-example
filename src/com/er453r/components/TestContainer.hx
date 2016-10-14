@@ -1,6 +1,5 @@
 package com.er453r.components;
 
-import js.html.DivElement;
 import haxe.Timer;
 
 import com.er453r.hxcompo.Component;
