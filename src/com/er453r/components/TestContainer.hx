@@ -15,7 +15,6 @@ class TestContainer extends Component {
 			append(component);
 		}
 
-		var title:DivElement = this.self;
 		title.innerHTML = "ready...";
 
 		Timer.delay(function(){

@@ -1,7 +1,7 @@
 #!/usr/bin/haxe
 -cp src
 -main com.er453r.components.TestContainer
--js dom-test.js
+-js hxcompo-example.js
 -D css=style.css
 -lib hxcompo
 #-dce full
