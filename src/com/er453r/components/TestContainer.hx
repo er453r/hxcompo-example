@@ -22,19 +22,6 @@ class TestContainer extends Component {
 	}
 
 	public function new():Void{
-		var test:Array<UInt> = [1, 2, 3];
-
-		var iter = test.iterator();
-
-		trace(iter.next());
-
-		var users = [{name:"Mark", age:30}, {name:"John", age:45}];
-
-		var userTemplate = new haxe.Template("::foreach users:: ::name::(::age::) ::end::");
-		var userOutput = userTemplate.execute({users: users});
-
-		trace(userOutput);
-
 		var component:TestComponent = new TestComponent();
 
 		for(n in 0...3){
