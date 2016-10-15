@@ -5,21 +5,8 @@ import haxe.Timer;
 import com.er453r.hxcompo.Component;
 
 class TestContainer extends Component {
-	private var todos(null, set):Array<String>;
-
-	function set_todos(value:Array<String>) {
-		trace('set todods');
-
-		return this.todos = value;
-	}
-
-	private var todo(null, set):String;
-
-	function set_todo(value:String) {
-		trace('set todod');
-
-		return this.todo = value;
-	}
+	private var todos:Array<String>;
+	private var todo:String;
 
 	public function new():Void{
 		var component:TestComponent = new TestComponent();
